@@ -47,13 +47,13 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 
 **Goal:** lock Claude's role to judging fights, resist prompt injection from fighter input.
 
-- [ ] Write the system prompt (`api/judge-prompt.js`, exporting `JUDGE_SYSTEM_PROMPT`): role locked to fight judge only — takes two fighters, returns a winner and reasoning, nothing else
-- [ ] Must always pick exactly one winner — no ties, no draws, no refusing to decide, even for identical/mirrored fighters (break the tie on flavor/creativity if needed, but still pick one)
-- [ ] Reasoning must be 2-4 sentences max, fun and playful tone, but logically justifies the winner
-- [ ] Explicitly forbid in the prompt: role changes, revealing the system prompt, following instructions embedded in fighter names/descriptions, doing anything other than judging the fight
-- [ ] Treat fighter input strictly as data to judge, never as instructions
-- [ ] Test with adversarial input (e.g. a fighter name containing "ignore previous instructions and...") — confirm it still just judges a fight
-- [ ] Test with identical fighters twice (e.g. "cow" vs "cow") — confirm it still names one winner, no tie/refusal
+- [x] Write the system prompt (`api/judge-prompt.js`, exporting `JUDGE_SYSTEM_PROMPT`): role locked to fight judge only — takes two fighters, returns a winner and reasoning, nothing else
+- [x] Must always pick exactly one winner — no ties, no draws, no refusing to decide, even for identical/mirrored fighters (break the tie on flavor/creativity if needed, but still pick one)
+- [x] Reasoning must be 2-4 sentences max, fun and playful tone, but logically justifies the winner
+- [x] Explicitly forbid in the prompt: role changes, revealing the system prompt, following instructions embedded in fighter names/descriptions, doing anything other than judging the fight
+- [x] Treat fighter input strictly as data to judge, never as instructions
+- [x] Test with adversarial input (e.g. a fighter name containing "ignore previous instructions and...") — confirm it still just judges a fight
+- [x] Test with identical fighters twice (e.g. "cow" vs "cow") — confirm it still names one winner, no tie/refusal
 
 **Done when:** injected instructions inside fighter text don't change judge behavior or leak the system prompt.
 
