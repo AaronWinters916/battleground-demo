@@ -32,12 +32,12 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 
 **Goal:** all core UI elements exist and are wired to JS, hardcoded/mock data only.
 
-- [ ] Four separate views on one page — input form, loading, result, error — each toggled via `hidden` attribute, never stacked/visible together
-- [ ] Input form view: two text inputs (fighter A, fighter B), Fight button — the only view visible on load
-- [ ] Loading view: spinner/skeleton, shown on click
-- [ ] Result view: winner name, written reasoning, two image slots — populate with placeholder text/images after a fake `setTimeout` delay
-- [ ] Error view: placeholder error message
-- [ ] Basic CSS layout
+- [x] Four separate views on one page — input form, loading, result, error — each toggled via `hidden` attribute, never stacked/visible together
+- [x] Input form view: two text inputs (fighter A, fighter B), Fight button — the only view visible on load
+- [x] Loading view: spinner/skeleton, shown on click
+- [x] Result view: winner name, written reasoning, two image slots — populate with placeholder text/images after a fake `setTimeout` delay
+- [x] Error view: placeholder error message
+- [x] Basic CSS layout
 
 **Done when:** on load only input form shows; clicking Fight hides it, shows loading, then swaps to result view (fake data) via `hidden`, no network calls yet.
 
