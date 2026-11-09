@@ -19,10 +19,10 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 **Goal:** empty project running locally.
 
 - [x] Core docs in place: `CLAUDE.md`, `project-brief.md`, `project-build.md`
-- [ ] `index.html`, `style.css`, `script.js` — bare skeleton, no logic yet
-- [ ] `vercel.json` (if needed) + `api/` folder for serverless functions
-- [ ] `package.json` (name, deps needed by `api/fight.js`: Anthropic SDK, OpenAI SDK, zod)
-- [ ] Run locally (e.g. `vercel dev` or a static server), confirm blank page loads
+- [x] `index.html`, `style.css`, `script.js` — bare skeleton, no logic yet
+- [x] `vercel.json` (if needed) + `api/` folder for serverless functions
+- [x] `package.json` (name, deps needed by `api/fight.js`: Anthropic SDK, OpenAI SDK, zod)
+- [x] Run locally (e.g. `vercel dev` or a static server), confirm blank page loads (verified via static server; `vercel` CLI not installed yet)
 
 **Done when:** blank page loads locally. No deploy — building and testing locally the whole way.
 

@@ -1,0 +1,14 @@
+{
+  "name": "battleground",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Type two fighters, get an AI verdict and pixel-art character art.",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0",
+    "openai": "^6.49.0",
+    "zod": "^4.6.7"
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Battleground</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Battleground</h1>
+
+    <section id="view-form">
+      <form id="fight-form">
+        <label for="fighter-a">Fighter A</label>
+        <input id="fighter-a" type="text" maxlength="50" required autocomplete="off">
+        <label for="fighter-b">Fighter B</label>
+        <input id="fighter-b" type="text" maxlength="50" required autocomplete="off">
+        <button type="submit" id="fight-btn">Fight!</button>
+      </form>
+    </section>
+
+    <section id="view-loading" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p>The fighters are squaring up…</p>
+    </section>
+
+    <section id="view-result" hidden>
+      <h2>Winner: <span id="result-winner"></span></h2>
+      <p id="result-reasoning"></p>
+      <div class="images">
+        <figure>
+          <img id="image-a" alt="Fighter A">
+          <figcaption id="label-a"></figcaption>
+        </figure>
+        <figure>
+          <img id="image-b" alt="Fighter B">
+          <figcaption id="label-b"></figcaption>
+        </figure>
+      </div>
+      <button type="button" id="again-btn">New fight</button>
+    </section>
+
+    <section id="view-error" hidden>
+      <h2>Something went wrong</h2>
+      <p id="error-message">Placeholder error message.</p>
+      <button type="button" id="retry-btn">Back</button>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
