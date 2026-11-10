@@ -17,17 +17,40 @@ function showResult({ winner, reasoning, imageA, imageB }, fighterA, fighterB) {
   showView('result');
 }
 
-// Stage 1: fake data + timeout. Replaced by fetch('/api/fight') in Stage 3.
-function runFight(fighterA, fighterB) {
+function showError(message) {
+  document.getElementById('error-message').textContent = message;
+  showView('error');
+}
+
+// Fight must finish within 60s (project-brief.md §7); abort and show an error otherwise.
+const FIGHT_TIMEOUT_MS = 60 * 1000;
+
+async function runFight(fighterA, fighterB) {
   showView('loading');
-  setTimeout(() => {
-    showResult({
-      winner: fighterA,
-      reasoning: 'Placeholder reasoning: this verdict is fake until the API is wired up.',
-      imageA: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="%23457b9d"/></svg>',
-      imageB: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="%232a9d8f"/></svg>',
-    }, fighterA, fighterB);
-  }, 1500);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FIGHT_TIMEOUT_MS);
+  try {
+    const res = await fetch('/api/fight', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fighterA, fighterB }),
+      signal: controller.signal,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      showError(data.error || 'The arena hit an unexpected snag. Give it another go.');
+      return;
+    }
+    showResult(data, fighterA, fighterB);
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      showError('This fight ran way past the final bell! Try again in a moment.');
+    } else {
+      showError("Can't reach the arena. Check your connection and try again.");
+    }
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 document.getElementById('fight-form').addEventListener('submit', (e) => {

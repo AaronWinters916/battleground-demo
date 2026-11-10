@@ -38,7 +38,7 @@ All application code (frontend, `api/` functions, BattleDex, dependencies) is bu
 
 - **Launch type**: demo, not a public launch. Not built to withstand abuse at scale.
 - **Rate limiting**: the in-memory per-IP limiter (resets on cold start, per-instance only) is an accepted limitation for a demo. No external store (Upstash/Vercel KV) for now.
-- **Cost**: keep API spend as minimal as feasible. Every fight = 1 Claude call + 2 `gpt-image-1` calls. No global daily cap for now. Set spend limits in the OpenAI and Anthropic dashboards before sharing the link (to be confirmed by the owner).
+- **Cost**: keep API spend as minimal as feasible. Every fight = 1 Claude call + 2 `gpt-image-1-mini` calls. No global daily cap for now. Set spend limits in the OpenAI and Anthropic dashboards before sharing the link (to be confirmed by the owner).
 - **Performance target**: a fight (verdict + both images) should complete in 60 seconds or less. Measure during Stage 7 QA; treat anything over 60s as a failure state to handle.
 - **Browser support**: Chrome only. Other browsers and mobile Safari are not tested or guaranteed.
 - **Content policy**: no blocking of real people, copyrighted characters, or offensive terms on our side. We rely only on OpenAI's built-in image moderation (the existing 422 announcer-voice error path).

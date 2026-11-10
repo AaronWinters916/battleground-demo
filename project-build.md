@@ -63,17 +63,17 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 
 **Goal:** one function, one call, real winner + reasoning + one image per side, end to end.
 
-- [ ] `api/fight.js` serverless function: takes `{ fighterA, fighterB }`
-- [ ] Validate server-side: both fighters present, each ≤ 50 characters
-- [ ] Rate limit check runs first, before calling either API — key by IP, 5 requests/minute per `project-brief.md` §5, return 429 with a clear message when exceeded (in-memory `Map` is fine for a demo, per brief §7)
-- [ ] Calls Claude for the verdict (using the Stage 2 system prompt) and OpenAI image API (`gpt-image-1`) for both fighters' art, in parallel
-- [ ] Verdict output (`winner`, `reasoning`) enforced via a zod schema, not JSON-format instructions in the prompt; `winner` must be the verbatim text of one fighter input
-- [ ] Store both API keys in env vars (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`), never in client code
-- [ ] Group inputs (e.g. "10 cows") still produce exactly one image for that side — handled in the prompt sent to the image API, not by looping
-- [ ] Every image generated must follow one shared art style template (`api/art-style.js`, exporting `ART_STYLE_TEMPLATE`), appended to each fighter's image prompt (not left to the model's default style):
+- [x] `api/fight.js` serverless function: takes `{ fighterA, fighterB }`
+- [x] Validate server-side: both fighters present, each ≤ 50 characters
+- [x] Rate limit check runs first, before calling either API — key by IP, 5 requests/minute per `project-brief.md` §5, return 429 with a clear message when exceeded (in-memory `Map` is fine for a demo, per brief §7)
+- [x] Calls Claude for the verdict (using the Stage 2 system prompt) and OpenAI image API (`gpt-image-1-mini`) for both fighters' art, in parallel
+- [x] Verdict output (`winner`, `reasoning`) enforced via a zod schema, not JSON-format instructions in the prompt; `winner` must be the verbatim text of one fighter input
+- [x] Store both API keys in env vars (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`), never in client code
+- [x] Group inputs (e.g. "10 cows") still produce exactly one image for that side — handled in the prompt sent to the image API, not by looping
+- [x] Every image generated must follow one shared art style template (`api/art-style.js`, exporting `ART_STYLE_TEMPLATE`), appended to each fighter's image prompt (not left to the model's default style):
   > 16-bit pixel art illustration, retro video game sprite style, bold outlined pixels, vibrant limited color palette, dynamic action pose. Depicted as one cohesive image, centered, filling most of the frame, isolated on a plain solid color background with no scenery. No text, words, letters, numbers, logos, watermarks, UI elements, borders, or frames.
-- [ ] Return `{ winner, reasoning, imageA, imageB }` (images as `data:image/png;base64` URIs)
-- [ ] Wire Fight button to call `/api/fight` instead of the fake timeout
+- [x] Return `{ winner, reasoning, imageA, imageB }` (images as `data:image/png;base64` URIs)
+- [x] Wire Fight button to call `/api/fight` instead of the fake timeout
 - [ ] Handle errors distinctly in the UI, in announcer-voice messages: verdict failure, image failure, moderation-blocked (OpenAI content moderation rejection, returned as 422 — distinct message from a generic image failure, which is 502), rate-limit 429 — don't hang on loading forever
 
 **Done when:** typing two real fighters returns winner + reasoning + one image per side from a single call, both images following the shared art style template; hammering Fight 6x in a minute from one IP gets blocked on the 6th and resets after a minute.
