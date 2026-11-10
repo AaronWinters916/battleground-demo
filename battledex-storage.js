@@ -28,10 +28,42 @@ function getFighters() {
   return Array.isArray(list) ? list : [];
 }
 
-// Saving a label that already exists replaces its image instead of duplicating it.
-function saveFighter({ label, image }) {
+// Stage 5: saved images are downsized on an off-screen canvas and re-exported as
+// compressed JPEG so many fighters fit in localStorage's ~5MB quota.
+const SAVED_IMAGE_SIZE = 256; // longest side in px
+const SAVED_IMAGE_QUALITY = 0.6;
+
+function compressImage(dataUri, maxSize = SAVED_IMAGE_SIZE, quality = SAVED_IMAGE_QUALITY) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas'); // never attached to the DOM
+      canvas.width = Math.max(1, Math.round(img.width * scale));
+      canvas.height = Math.max(1, Math.round(img.height * scale));
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff'; // JPEG has no alpha
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => reject(new Error('Could not load image for compression'));
+    img.src = dataUri;
+  });
+}
+
+// Compresses the image, then saves. Saving a label that already exists replaces
+// its image instead of duplicating it. Resolves true on success, false if
+// compression failed or storage is full.
+async function saveFighter({ label, image }) {
+  let compressed;
+  try {
+    compressed = await compressImage(image);
+  } catch {
+    return false;
+  }
   const list = getFighters().filter((f) => f.label !== label);
-  list.push({ label, image });
+  list.push({ label, image: compressed });
   return writeJSON(BATTLEDEX_KEY, list);
 }
 

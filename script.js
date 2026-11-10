@@ -11,9 +11,10 @@ function setSaveButton(id, label, image) {
   const btn = document.getElementById(id);
   btn.disabled = false;
   btn.textContent = 'Save to BattleDex';
-  btn.onclick = () => {
-    const ok = saveFighter({ label, image });
-    btn.textContent = ok ? 'Saved!' : 'Storage full';
+  btn.onclick = async () => {
+    btn.disabled = true;
+    const ok = await saveFighter({ label, image });
+    btn.textContent = ok ? 'Saved!' : 'Could not save (storage full?)';
     btn.disabled = ok;
   };
 }
