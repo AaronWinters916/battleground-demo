@@ -22,7 +22,7 @@ I would eventually like a real backend where BattleDex characters sync across de
 - **Character art**: one image per side. Group inputs (e.g. "10 cows vs 10 lions") still get one image per side, not one per unit.
 - **Image storage**: images downsized/compressed client-side (canvas resize + JPEG/WebP quality) before saving to localStorage, to stay under browser storage quota.
 - **Fighter input limit**: each fighter name is capped at 50 characters, enforced server-side.
-- **Art style**: every image follows one shared 16-bit pixel-art template (retro sprite style, limited palette, centered subject on a plain solid background, no text/logos/borders). See `project-build.md` Stage 3 for the full template.
+- **Art style**: every image follows one shared retro 8-bit pixel-art template (NES-style sprite, chunky pixels, very limited flat palette, centered subject on a plain solid background, no text/logos/borders). See `project-build.md` Stage 3 for the full template.
 
 ## 6. Project documents and starting state
 
