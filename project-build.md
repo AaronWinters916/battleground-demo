@@ -72,7 +72,7 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 - [x] Group inputs (e.g. "10 cows") still produce exactly one image for that side — handled in the prompt sent to the image API, not by looping
 - [x] Every image generated must follow one shared art style template (`api/art-style.js`, exporting `ART_STYLE_TEMPLATE`), appended to each fighter's image prompt (not left to the model's default style):
   > 16-bit pixel art illustration, retro video game sprite style, bold outlined pixels, vibrant limited color palette, dynamic action pose. Depicted as one cohesive image, centered, filling most of the frame, isolated on a plain solid color background with no scenery. No text, words, letters, numbers, logos, watermarks, UI elements, borders, or frames.
-- [x] Return `{ winner, reasoning, imageA, imageB }` (images as `data:image/png;base64` URIs)
+- [x] Return `{ winner, reasoning, imageA, imageB }` (images as heavily compressed `data:image/jpeg;base64` URIs, to stay under Vercel's 4.5MB response cap)
 - [x] Wire Fight button to call `/api/fight` instead of the fake timeout
 - [ ] Handle errors distinctly in the UI, in announcer-voice messages: verdict failure, image failure, moderation-blocked (OpenAI content moderation rejection, returned as 422 — distinct message from a generic image failure, which is 502), rate-limit 429 — don't hang on loading forever
 

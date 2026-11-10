@@ -50,9 +50,11 @@ async function generateImage(fighter) {
     prompt: imagePrompt(fighter),
     size: '1024x1024',
     quality: 'low', // keeps API spend minimal (brief §7)
+    output_format: 'jpeg',
+    output_compression: 30, // heavy compression: small payload (Vercel's 4.5MB response cap) is worth the quality loss for a demo
     n: 1,
   });
-  return `data:image/png;base64,${result.data[0].b64_json}`;
+  return `data:image/jpeg;base64,${result.data[0].b64_json}`;
 }
 
 function isModerationBlock(err) {
