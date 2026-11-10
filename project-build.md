@@ -84,11 +84,11 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 
 **Goal:** save individual fighters, view saved fighters.
 
-- [ ] "Save" action per fighter: writes `{ label, image }` to a `localStorage` array — no fight/winner/reasoning data, just the fighter
-- [ ] BattleDex page (`battledex.html` + `battledex.js`, sharing `battledex-storage.js` with the fight page): grid of saved fighters, each a mini trading-card style (image on top, name below) — not clickable, card just displays label + image
-- [ ] Delete/clear entries from BattleDex
-- [ ] "Back to last fight" button on BattleDex — jumps back to most recent result (last fight persisted separately; link via `index.html?view=result`)
-- [ ] "New fight" button on BattleDex — returns to input form view
+- [x] "Save" action per fighter: writes `{ label, image }` to a `localStorage` array — no fight/winner/reasoning data, just the fighter
+- [x] BattleDex page (`battledex.html` + `battledex.js`, sharing `battledex-storage.js` with the fight page): grid of saved fighters, each a mini trading-card style (image on top, name below) — not clickable, card just displays label + image
+- [x] Delete/clear entries from BattleDex
+- [x] "Back to last fight" button on BattleDex — jumps back to most recent result (last fight persisted separately; link via `index.html?view=result`)
+- [x] "New fight" button on BattleDex — returns to input form view
 
 **Done when:** save a fighter, reload the page, it's still there in BattleDex; from BattleDex, can jump back to last fight result or start a new fight.
 
@@ -128,7 +128,7 @@ Everything under Stage 0–7 below is still to be built. Check items off only af
 - [ ] Confirm no content blocking on our side — only OpenAI moderation (422 path) rejects fighters (brief §7)
 - [ ] Confirm loading/error states cover: fight API failure (verdict or image side), rate limit hit, network offline
 - [ ] Measure fight latency; must finish within 60s (add a client timeout/error state if it can exceed this)
-- [ ] Add one-line "saved on this device only" notice to the BattleDex page
+- [x] Add one-line "saved on this device only" notice to the BattleDex page
 - [ ] Confirm spend limits are set in OpenAI and Anthropic dashboards before sharing the link
 - [ ] Test in Chrome only (other browsers out of scope)
 - [ ] Update `CLAUDE.md` so it matches what was actually built
