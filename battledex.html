@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BattleDex — Battleground</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>BattleDex</h1>
+    <p class="notice">Fighters are saved on this device only.</p>
+
+    <nav class="actions">
+      <a id="back-link" class="button" href="index.html?view=result" hidden>Back to last fight</a>
+      <a class="button" href="index.html">New fight</a>
+      <button type="button" id="clear-btn" hidden>Clear all</button>
+    </nav>
+
+    <p id="empty-msg" hidden>No fighters saved yet. Win a fight, then save a fighter.</p>
+    <div id="grid" class="grid"></div>
+  </main>
+  <script src="battledex-storage.js"></script>
+  <script src="battledex.js"></script>
+</body>
+</html>

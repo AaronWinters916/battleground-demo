@@ -9,6 +9,7 @@
 <body>
   <main>
     <h1>Battleground</h1>
+    <nav class="actions"><a class="button" href="battledex.html">BattleDex</a></nav>
 
     <section id="view-form">
       <form id="fight-form">
@@ -32,10 +33,12 @@
         <figure>
           <img id="image-a" alt="Fighter A">
           <figcaption id="label-a"></figcaption>
+          <button type="button" class="save-btn" id="save-a">Save to BattleDex</button>
         </figure>
         <figure>
           <img id="image-b" alt="Fighter B">
           <figcaption id="label-b"></figcaption>
+          <button type="button" class="save-btn" id="save-b">Save to BattleDex</button>
         </figure>
       </div>
       <button type="button" id="again-btn">New fight</button>
@@ -47,6 +50,7 @@
       <button type="button" id="retry-btn">Back</button>
     </section>
   </main>
+  <script src="battledex-storage.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

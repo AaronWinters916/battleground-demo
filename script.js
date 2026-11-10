@@ -7,7 +7,20 @@ function showView(name) {
   }
 }
 
+function setSaveButton(id, label, image) {
+  const btn = document.getElementById(id);
+  btn.disabled = false;
+  btn.textContent = 'Save to BattleDex';
+  btn.onclick = () => {
+    const ok = saveFighter({ label, image });
+    btn.textContent = ok ? 'Saved!' : 'Storage full';
+    btn.disabled = ok;
+  };
+}
+
 function showResult({ winner, reasoning, imageA, imageB }, fighterA, fighterB) {
+  setSaveButton('save-a', fighterA, imageA);
+  setSaveButton('save-b', fighterB, imageB);
   document.getElementById('result-winner').textContent = winner;
   document.getElementById('result-reasoning').textContent = reasoning;
   document.getElementById('image-a').src = imageA;
@@ -41,6 +54,7 @@ async function runFight(fighterA, fighterB) {
       showError(data.error || 'The arena hit an unexpected snag. Give it another go.');
       return;
     }
+    setLastFight({ fighterA, fighterB, ...data });
     showResult(data, fighterA, fighterB);
   } catch (err) {
     if (err.name === 'AbortError') {
@@ -64,4 +78,10 @@ document.getElementById('fight-form').addEventListener('submit', (e) => {
 document.getElementById('again-btn').addEventListener('click', () => showView('form'));
 document.getElementById('retry-btn').addEventListener('click', () => showView('form'));
 
-showView('form');
+// Coming back from the BattleDex: ?view=result restores the last fight.
+const last = new URLSearchParams(location.search).get('view') === 'result' ? getLastFight() : null;
+if (last) {
+  showResult(last, last.fighterA, last.fighterB);
+} else {
+  showView('form');
+}
